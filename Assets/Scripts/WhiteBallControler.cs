@@ -34,6 +34,7 @@ public class WhiteBallControler : MonoBehaviour
         {
             m_AudioSource.PlayOneShot(Good);
             StartPosition();
+            GamePlayManager.Instance.Points += 1;
         }
 
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Bottom Collider"))

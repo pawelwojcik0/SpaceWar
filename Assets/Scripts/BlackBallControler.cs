@@ -11,6 +11,7 @@ public class BlackBallControler : MonoBehaviour
     private float StartPositionX = 0.0f;
     private float StartPositionY = 0.0f;
     private AudioSource m_AudioSource;
+    private GamePlayManager m_GamePlayManager;
     
 
 
@@ -22,7 +23,7 @@ public class BlackBallControler : MonoBehaviour
         transform.position = new Vector3(StartPositionX, StartPositionY, 0f);
 
         m_AudioSource = GetComponent<AudioSource>();
-
+        m_GamePlayManager = FindObjectOfType<GamePlayManager>();
     }
     void Update()
     {
@@ -35,6 +36,7 @@ public class BlackBallControler : MonoBehaviour
         {
             m_AudioSource.PlayOneShot(Bad);
             StartPosition();
+            m_GamePlayManager.lifes -= 1;
         }
 
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Bottom Collider"))
