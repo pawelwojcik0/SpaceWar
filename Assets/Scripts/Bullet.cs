@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private AudioClip Explosion; 
+
+    private AudioSource m_AudioSoruce;
+    private SpriteRenderer m_Sprite;
+    private BoxCollider2D m_Collider;
     private float speed;
     private Vector3 direction;
     private bool isSet;
@@ -14,6 +19,13 @@ public class Bullet : MonoBehaviour
         this.speed = speed;
         this.direction = direction;
         isSet = true; 
+    }
+
+    private void Start()
+    {
+        m_AudioSoruce = GetComponent<AudioSource>();
+        m_Sprite = GetComponent<SpriteRenderer>();
+        m_Collider = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -29,6 +41,16 @@ public class Bullet : MonoBehaviour
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Top Collider"))
         {
             Destroy(gameObject);
+        }
+
+        if(collision.collider.gameObject.layer == LayerMask.NameToLayer("Killer"))
+        {
+            m_Sprite.enabled = false;
+            m_Collider.enabled = false;
+            m_AudioSoruce.PlayOneShot(Explosion);
+
+
+            Destroy(gameObject, 0.13f);
         }
     }
 

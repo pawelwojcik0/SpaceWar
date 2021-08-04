@@ -6,15 +6,13 @@ public class BlackBallControler : MonoBehaviour
 {
 
     [SerializeField] AudioClip Bad;
-    [SerializeField] private float MovementSpeed = 1.0f;
+    [SerializeField] private float MovementSpeed;
 
     private float StartPositionX = 0.0f;
     private float StartPositionY = 0.0f;
     private AudioSource m_AudioSource;
     private GamePlayManager m_GamePlayManager;
     
-
-
 
     private void Start()
     {

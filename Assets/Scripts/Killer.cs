@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class Killer : MonoBehaviour
 {
-
-    [SerializeField] AudioClip Kill;
-    [SerializeField] AudioClip Explosion;
-    [SerializeField] private float MovementSpeed = 1.0f;
-
-    public bool hitTheHead;
-    public bool hitTheBullet; 
+    [SerializeField] private float MovementSpeed;
     
     private float StartPositionX = 0.0f;
     private float StartPositionY = 6.0f;
     private AudioSource m_AudioSource;
-    private Animator m_animator;
     
 
     private void Start()
@@ -25,9 +18,6 @@ public class Killer : MonoBehaviour
         transform.position = new Vector3(StartPositionX, StartPositionY, 0f);
 
         m_AudioSource = GetComponent<AudioSource>();
-        m_animator = GetComponentInChildren<Animator>();
-        
-
     }
     private void Update()
     {
@@ -35,14 +25,7 @@ public class Killer : MonoBehaviour
     }
      
     private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Head"))
-        {
-            m_AudioSource.PlayOneShot(Kill);
-            hitTheHead = true; 
-
-        }
-
+    { 
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Bottom Collider"))
         {
             StartPosition();
@@ -50,7 +33,6 @@ public class Killer : MonoBehaviour
        
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
-            m_AudioSource.PlayOneShot(Explosion);
             StartPosition();
         }
     }

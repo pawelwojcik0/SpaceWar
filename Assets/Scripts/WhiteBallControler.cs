@@ -6,7 +6,7 @@ public class WhiteBallControler : MonoBehaviour
 {
 
     [SerializeField] AudioClip Good;
-    [SerializeField] private float MovementSpeed = 1.0f;
+    [SerializeField] private float MovementSpeed;
 
     private float StartPositionX = 0.0f;
     private float StartPositionY = 6.0f;
@@ -21,7 +21,6 @@ public class WhiteBallControler : MonoBehaviour
         transform.position = new Vector3(StartPositionX, StartPositionY, 0f);
 
         m_AudioSource = GetComponent<AudioSource>();
-
     }
     void Update()
     {
@@ -32,9 +31,9 @@ public class WhiteBallControler : MonoBehaviour
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Head"))
         {
+            GamePlayManager.Instance.Points += 1;
             m_AudioSource.PlayOneShot(Good);
             StartPosition();
-            GamePlayManager.Instance.Points += 1;
         }
 
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Bottom Collider"))

@@ -10,7 +10,7 @@ public class HUDController : MonoBehaviour
 
    public void UpdatePoints(int points)
     {
-        PointsText.text = "Points: " + points; 
+        PointsText.text = "" + points; 
     }
 
 }

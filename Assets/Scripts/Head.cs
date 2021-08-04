@@ -1,55 +1,62 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class Head : MonoBehaviour
 {
-    [SerializeField] float speed = 1.0f;
-    [SerializeField] float MaxPosition = 3.0f;
+    [SerializeField] private float MovementSpeed;
+    [SerializeField] private float MaxPositionX = 3.0f;
+    [SerializeField] private float MaxPositionY = 4.6f;
 
     public Vector3 HeadPosition;
     public Bullet bulletfab;
     public Transform bulletOrigin;
     public float bulletSpeed = 5f;
     
-
-    private Killer killer;
-   
+    private AudioSource m_AudioSoruce;
 
     private void Start()
     {
-        killer = FindObjectOfType<Killer>();
-        
+        m_AudioSoruce = GetComponent<AudioSource>();
     }
 
     void Update()
     {
         Movement();
-        Shoot();
-        if (killer.hitTheHead == true)
-        {
-            Destroy(gameObject); 
-        }
-       
+        Shoot();       
         
     }
 
     private void Movement()
     {
-        float direction = Input.GetAxisRaw("Horizontal");
-        if ((direction > 0 && transform.position.x < MaxPosition) || (direction < 0 && transform.position.x > -MaxPosition))
-            
+        float directionX = Input.GetAxisRaw("Horizontal");
+        if ((directionX > 0 && transform.position.x < MaxPositionX) || (directionX < 0 && transform.position.x > -MaxPositionX))
+
         {
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                transform.position += Vector3.right * speed * Time.deltaTime;
+                transform.position += Vector3.right * MovementSpeed * Time.deltaTime;
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                transform.position += Vector3.left * speed * Time.deltaTime;
+                transform.position += Vector3.left * MovementSpeed * Time.deltaTime;
             }
-        }  
+        }
+
+        float directionY = Input.GetAxisRaw("Vertical");
+        if ((directionY > 0 && transform.position.y < MaxPositionY) || (directionY < 0 && transform.position.y > -MaxPositionY))
+        {
+            if (Input.GetKey(KeyCode.UpArrow))
+            {
+                transform.position += Vector3.up * MovementSpeed * Time.deltaTime;
+            }    
+
+            if(Input.GetKey(KeyCode.DownArrow))
+            {
+                transform.position += Vector3.down * MovementSpeed * Time.deltaTime;
+            }
+        }
     }
 
     private void Shoot()
@@ -59,6 +66,15 @@ public class Head : MonoBehaviour
             Bullet bullet = Instantiate(bulletfab);
             bullet.Setup(bulletOrigin.position, bulletSpeed, Vector3.up);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Killer"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+        }
+            
     }
 
 }
