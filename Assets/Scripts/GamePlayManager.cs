@@ -56,6 +56,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     private void Update()
     {
         Life();
+        Restart();
     }
 
     private void Life()
@@ -84,7 +85,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(7, 11));
+            yield return new WaitForSeconds(Random.Range(6, 8));
             for (RandomKiller = Random.Range(12, 14); RandomKiller >= 0; --RandomKiller)
             {
                 GameObject.Instantiate(KillerWave, Vector3.zero, Quaternion.identity);    
@@ -96,7 +97,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     {
         while(true)
         {
-            yield return new WaitForSeconds(Random.Range(5,8));
+            yield return new WaitForSeconds(Random.Range(8, 10));
             GameObject.Instantiate(Bonus, Vector3.zero, Quaternion.identity);
         }
     }
@@ -105,7 +106,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     {
         while(true)
         {
-            yield return new WaitForSeconds(Random.Range(16, 20));
+            yield return new WaitForSeconds(Random.Range(9, 12));
             GameObject.Instantiate(Disturbence, Vector3.zero, Quaternion.identity);
         }
     }    
@@ -119,7 +120,11 @@ public class GamePlayManager : Singleton<GamePlayManager>
     {
         SaveManager.Instance.SaveSettings();
         m_GameOver.gameObject.SetActive(true);
-        if (Input.GetKeyDown(KeyCode.N))
+    }
+
+    private void Restart()
+    {
+        if (m_GameOver.activeSelf && Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
