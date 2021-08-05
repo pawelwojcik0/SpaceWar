@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Killer : MonoBehaviour
+public class Killer : MonoBehaviour, IHittable
 {
     [SerializeField] private float MovementSpeed;
 
@@ -36,10 +36,7 @@ public class Killer : MonoBehaviour
             StartPosition();
         }
 
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Security"))
-        {
-            StartPosition();
-        }
+        
     }
     private void StartPosition()
     {
@@ -52,4 +49,8 @@ public class Killer : MonoBehaviour
         transform.position += Vector3.down * MovementSpeed * Time.deltaTime; 
     }
 
+    public void OnHit()
+    {
+        StartPosition();
+    }
 }

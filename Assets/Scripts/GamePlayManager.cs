@@ -7,6 +7,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
 {
     public int lifes;
     public int m_points = 0;
+    public int m_bullets = 0;
 
     [Header("Lifes")]
     [SerializeField] private GameObject FirstLife;
@@ -21,11 +22,17 @@ public class GamePlayManager : Singleton<GamePlayManager>
     [SerializeField] private GameObject m_GameOver;
 
     private HUDController m_HUD;
-    private Head m_Head;
-    private Bonus m_Bonus;
     private int RandomKiller;
 
-    
+    public int Bullets
+    {
+        get { return m_bullets; }
+        set
+        {
+            m_bullets = value;
+            m_HUD.UpdateBullet(m_bullets);
+        }
+    }
 
     public int Points
     {
@@ -40,9 +47,8 @@ public class GamePlayManager : Singleton<GamePlayManager>
     private void Start()
     {
         m_HUD = FindObjectOfType<HUDController>();
-        m_Head = FindObjectOfType<Head>();
-        m_Bonus = FindObjectOfType<Bonus>();
 
+        Bullets = 15;
         Points = 0;
         lifes = 3;
 
@@ -51,6 +57,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
         StartCoroutine(DisturbenceInstantiate());
 
         m_GameOver.SetActive(false);
+
     }
 
     private void Update()
@@ -95,7 +102,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
 
     IEnumerator BonusInstantiate()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(Random.Range(8, 10));
             GameObject.Instantiate(Bonus, Vector3.zero, Quaternion.identity);

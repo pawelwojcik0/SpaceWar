@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KillerWave : MonoBehaviour
+public class KillerWave : MonoBehaviour, IHittable
 {
     [SerializeField] private float MovementSpeed;
 
@@ -35,10 +35,6 @@ public class KillerWave : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Security"))
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void Movement()
@@ -46,4 +42,8 @@ public class KillerWave : MonoBehaviour
         transform.position += Vector3.down * MovementSpeed * Time.deltaTime;
     }
 
+    public void OnHit()
+    {
+        Destroy(gameObject);
+    }
 }

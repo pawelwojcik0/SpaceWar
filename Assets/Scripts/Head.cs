@@ -15,15 +15,12 @@ public class Head : MonoBehaviour
 
     private GamePlayManager m_Manager;
     private AudioSource m_AudioSoruce;
-    private float TimePassed;
 
     private void Start()
     {
         m_Manager = FindObjectOfType<GamePlayManager>();
 
         m_AudioSoruce = GetComponent<AudioSource>();
-
-        StartCoroutine(Speed());
     }
 
     private void Update()
@@ -66,10 +63,11 @@ public class Head : MonoBehaviour
 
     private void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && m_Manager.Bullets > 0)
         {
             Bullet bullet = Instantiate(bulletfab);
             bullet.Setup(bulletOrigin.position, bulletSpeed, Vector3.up);
+            GamePlayManager.Instance.Bullets -= 1;
         }
     }
 
@@ -81,16 +79,4 @@ public class Head : MonoBehaviour
             m_Manager.GameOver();
         }  
     }
-
-    IEnumerator Speed()
-    {
-        while (true)
-        {
-            yield return new WaitUntil(() => HeadMovementSpeed == 4f);
-
-            yield return new WaitForSeconds(5);
-            HeadMovementSpeed = 4f;
-        }
-    }
-
 }

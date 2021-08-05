@@ -13,20 +13,26 @@ public class Security : MonoBehaviour
         m_Transform = m_Head.GetComponent<Transform>();
 
         transform.position = m_Transform.position;
+        transform.localScale = new Vector3(0.21f, 0.21f, 1f);
         Destroy(gameObject, 8f);
     }
 
     private void Update()
     {
         transform.position = new Vector3(m_Transform.position.x, m_Transform.position.y, m_Transform.position.z);
-        transform.localScale = new Vector3(0.21f, 0.21f, 1f);
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.gameObject)
+        IHittable hittable = collision.collider.GetComponent<IHittable>();
+
+        if (hittable != null)
         {
+            hittable.OnHit();
             Destroy(gameObject);
         }
+            
+     
     }
 }

@@ -44,7 +44,6 @@ public class Bullet : MonoBehaviour
         {
             //m_Animator.enabled = true;
             //m_Animator.Play(0);
-            GamePlayManager.Instance.Points -= 1;
             Destroy(gameObject);
         }
 

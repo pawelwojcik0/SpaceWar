@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlackBallControler : MonoBehaviour
+public class BlackBallControler : MonoBehaviour, IHittable
 {
 
     [SerializeField] AudioClip Bad;
@@ -41,11 +41,6 @@ public class BlackBallControler : MonoBehaviour
         {
             StartPosition();
         }
-
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Security"))
-        {
-            StartPosition();
-        }
     }
 
     private void StartPosition()
@@ -57,5 +52,10 @@ public class BlackBallControler : MonoBehaviour
     private void Movement()
     {
         transform.position += Vector3.down * MovementSpeed * Time.deltaTime; 
+    }
+
+    public void OnHit()
+    {
+        StartPosition();
     }
 }
