@@ -8,8 +8,8 @@ public class BlackBallControler : MonoBehaviour
     [SerializeField] AudioClip Bad;
     [SerializeField] private float MovementSpeed;
 
-    private float StartPositionX = 0.0f;
-    private float StartPositionY = 0.0f;
+    private float StartPositionX;
+    private float StartPositionY;
     private AudioSource m_AudioSource;
     private GamePlayManager m_GamePlayManager;
     
@@ -38,6 +38,11 @@ public class BlackBallControler : MonoBehaviour
         }
 
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Bottom Collider"))
+        {
+            StartPosition();
+        }
+
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Security"))
         {
             StartPosition();
         }

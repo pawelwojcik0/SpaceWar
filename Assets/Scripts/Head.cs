@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Head : MonoBehaviour
 {
-    [SerializeField] private float MovementSpeed;
+    [SerializeField] public float HeadMovementSpeed;
     [SerializeField] private float MaxPositionX = 3.0f;
     [SerializeField] private float MaxPositionY = 4.6f;
 
@@ -12,19 +12,24 @@ public class Head : MonoBehaviour
     public Bullet bulletfab;
     public Transform bulletOrigin;
     public float bulletSpeed = 5f;
-    
+
+    private GamePlayManager m_Manager;
     private AudioSource m_AudioSoruce;
+    private float TimePassed;
 
     private void Start()
     {
+        m_Manager = FindObjectOfType<GamePlayManager>();
+
         m_AudioSoruce = GetComponent<AudioSource>();
+
+        StartCoroutine(Speed());
     }
 
-    void Update()
+    private void Update()
     {
         Movement();
-        Shoot();       
-        
+        Shoot();
     }
 
     private void Movement()
@@ -35,12 +40,12 @@ public class Head : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                transform.position += Vector3.right * MovementSpeed * Time.deltaTime;
+                transform.position += Vector3.right * HeadMovementSpeed * Time.deltaTime;
             }
 
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                transform.position += Vector3.left * MovementSpeed * Time.deltaTime;
+                transform.position += Vector3.left * HeadMovementSpeed * Time.deltaTime;
             }
         }
 
@@ -49,12 +54,12 @@ public class Head : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                transform.position += Vector3.up * MovementSpeed * Time.deltaTime;
+                transform.position += Vector3.up * HeadMovementSpeed * Time.deltaTime;
             }    
 
             if(Input.GetKey(KeyCode.DownArrow))
             {
-                transform.position += Vector3.down * MovementSpeed * Time.deltaTime;
+                transform.position += Vector3.down * HeadMovementSpeed * Time.deltaTime;
             }
         }
     }
@@ -72,9 +77,20 @@ public class Head : MonoBehaviour
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Killer"))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+            Destroy(gameObject);
+            m_Manager.GameOver();
+        }  
+    }
+
+    IEnumerator Speed()
+    {
+        while (true)
+        {
+            yield return new WaitUntil(() => HeadMovementSpeed == 4f);
+
+            yield return new WaitForSeconds(5);
+            HeadMovementSpeed = 4f;
         }
-            
     }
 
 }

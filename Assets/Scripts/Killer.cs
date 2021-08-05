@@ -5,9 +5,9 @@ using UnityEngine;
 public class Killer : MonoBehaviour
 {
     [SerializeField] private float MovementSpeed;
-    
-    private float StartPositionX = 0.0f;
-    private float StartPositionY = 6.0f;
+
+    private float StartPositionX;
+    private float StartPositionY;
     private AudioSource m_AudioSource;
     
 
@@ -32,6 +32,11 @@ public class Killer : MonoBehaviour
         }
        
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+        {
+            StartPosition();
+        }
+
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Security"))
         {
             StartPosition();
         }

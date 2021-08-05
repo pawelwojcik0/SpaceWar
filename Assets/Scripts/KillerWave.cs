@@ -6,8 +6,8 @@ public class KillerWave : MonoBehaviour
 {
     [SerializeField] private float MovementSpeed;
 
-    private float StartPositionX = 0.0f;
-    private float StartPositionY = 6.0f;
+    private float StartPositionX;
+    private float StartPositionY;
     private AudioSource m_AudioSource;
 
     private void Start()
@@ -34,11 +34,11 @@ public class KillerWave : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-    private void StartPosition()
-    {
-        StartPositionX = Random.Range(-3.2f, 3.2f);
-        transform.position = new Vector3(StartPositionX, StartPositionY, 0f);
+
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Security"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Movement()

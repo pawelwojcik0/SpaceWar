@@ -9,14 +9,16 @@ public class GamePlayManager : Singleton<GamePlayManager>
     public int m_points = 0;
 
     [Header("Lifes")]
-    public GameObject FirstLife;
-    public GameObject SecondLife;
-    public GameObject ThirdLife;
+    [SerializeField] private GameObject FirstLife;
+    [SerializeField] private GameObject SecondLife;
+    [SerializeField] private GameObject ThirdLife;
 
     [Header("Prefabs")]
-    public GameObject Bonus;
-    public GameObject KillerWave;
-    public GameObject BlueBallWave;
+    [SerializeField] private GameObject Bonus;
+    [SerializeField] private GameObject KillerWave;
+    [SerializeField] private GameObject BlueBallWave;
+    [SerializeField] private GameObject Disturbence;
+    [SerializeField] private GameObject m_GameOver;
 
     private HUDController m_HUD;
     private Head m_Head;
@@ -44,8 +46,11 @@ public class GamePlayManager : Singleton<GamePlayManager>
         Points = 0;
         lifes = 3;
 
-        StartCoroutine(BonusInstantate());
+        StartCoroutine(BonusInstantiate());
         StartCoroutine(DeathWave());
+        StartCoroutine(DisturbenceInstantiate());
+
+        m_GameOver.SetActive(false);
     }
 
     private void Update()
@@ -68,7 +73,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
                     if (lifes <= 0)
                     {
                         Destroy(FirstLife);
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                        GameOver();
                     }
                 }
             }
@@ -79,7 +84,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(15, 30));
+            yield return new WaitForSeconds(Random.Range(7, 11));
             for (RandomKiller = Random.Range(12, 14); RandomKiller >= 0; --RandomKiller)
             {
                 GameObject.Instantiate(KillerWave, Vector3.zero, Quaternion.identity);    
@@ -87,17 +92,36 @@ public class GamePlayManager : Singleton<GamePlayManager>
         }
     }
 
-    IEnumerator BonusInstantate()
+    IEnumerator BonusInstantiate()
     {
         while(true)
         {
-            yield return new WaitForSeconds(Random.Range(15,20));
+            yield return new WaitForSeconds(Random.Range(5,8));
             GameObject.Instantiate(Bonus, Vector3.zero, Quaternion.identity);
         }
     }
 
+    IEnumerator DisturbenceInstantiate()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(Random.Range(16, 20));
+            GameObject.Instantiate(Disturbence, Vector3.zero, Quaternion.identity);
+        }
+    }    
+   
     private void OnDestroy()
     {
         StopAllCoroutines();
+    }
+
+    public void GameOver()
+    {
+        SaveManager.Instance.SaveSettings();
+        m_GameOver.gameObject.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }

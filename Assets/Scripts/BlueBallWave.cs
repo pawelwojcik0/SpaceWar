@@ -8,8 +8,8 @@ public class BlueBallWave : MonoBehaviour
     [SerializeField] AudioClip Good;
     [SerializeField] private float MovementSpeed;
 
-    private float StartPositionX = 0.0f;
-    private float StartPositionY = 6.0f;
+    private float StartPositionX;
+    private float StartPositionY;
     private AudioSource m_AudioSource;
     private SpriteRenderer m_Sprite;
     private CircleCollider2D m_Collider;
@@ -45,12 +45,6 @@ public class BlueBallWave : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    private void StartPosition()
-    {
-        StartPositionX = Random.Range(-3.2f, 3.2f);
-        transform.position = new Vector3(StartPositionX, StartPositionY, 0f);
     }
 
     private void Movement()

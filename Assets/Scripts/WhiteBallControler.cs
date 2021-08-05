@@ -8,8 +8,8 @@ public class WhiteBallControler : MonoBehaviour
     [SerializeField] AudioClip Good;
     [SerializeField] private float MovementSpeed;
 
-    private float StartPositionX = 0.0f;
-    private float StartPositionY = 6.0f;
+    private float StartPositionX;
+    private float StartPositionY;
     private AudioSource m_AudioSource;
      
 
