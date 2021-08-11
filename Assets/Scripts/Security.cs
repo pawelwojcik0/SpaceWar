@@ -14,13 +14,16 @@ public class Security : MonoBehaviour
 
         transform.position = m_Transform.position;
         transform.localScale = new Vector3(0.21f, 0.21f, 1f);
-        Destroy(gameObject, 8f);
+        
+    }
+    private void OnEnable()
+    {
+        Invoke("DeactivateAfterSeconds", 8f);
     }
 
     private void Update()
     {
         transform.position = new Vector3(m_Transform.position.x, m_Transform.position.y, m_Transform.position.z);
-
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -30,9 +33,12 @@ public class Security : MonoBehaviour
         if (hittable != null)
         {
             hittable.OnHit();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
-            
-     
+    }
+
+    private void DeactivateAfterSeconds()
+    {
+        gameObject.SetActive(false);
     }
 }

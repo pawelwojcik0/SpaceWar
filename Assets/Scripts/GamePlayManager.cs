@@ -104,6 +104,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     {
         while (true)
         {
+           
             yield return new WaitForSeconds(Random.Range(8, 10));
             GameObject.Instantiate(Bonus, Vector3.zero, Quaternion.identity);
         }

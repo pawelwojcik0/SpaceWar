@@ -35,8 +35,6 @@ public class Killer : MonoBehaviour, IHittable
         {
             StartPosition();
         }
-
-        
     }
     private void StartPosition()
     {

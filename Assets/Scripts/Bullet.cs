@@ -42,8 +42,6 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Top Collider"))
         {
-            //m_Animator.enabled = true;
-            //m_Animator.Play(0);
             Destroy(gameObject);
         }
 

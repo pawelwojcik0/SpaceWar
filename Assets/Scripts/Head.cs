@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class Head : MonoBehaviour
 {
     [SerializeField] public float HeadMovementSpeed;
+
+    [SerializeField] private GameObject Security;
     [SerializeField] private float MaxPositionX = 3.0f;
     [SerializeField] private float MaxPositionY = 4.6f;
 
@@ -15,6 +17,7 @@ public class Head : MonoBehaviour
 
     private GamePlayManager m_Manager;
     private AudioSource m_AudioSoruce;
+    
 
     private void Start()
     {
@@ -73,7 +76,7 @@ public class Head : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Killer"))
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Killer") && Security.activeInHierarchy == false)
         {
             Destroy(gameObject);
             m_Manager.GameOver();

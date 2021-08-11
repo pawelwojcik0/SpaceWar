@@ -7,7 +7,6 @@ public class Bonus : MonoBehaviour
 
     public GameObject BlueBallWave;
     public GameObject Security;
-    public int isCatched;
 
     private int RandomBall;
     private float RandomBonus;
@@ -19,11 +18,12 @@ public class Bonus : MonoBehaviour
     {
         m_Head = FindObjectOfType<Head>();
 
+
         StartpositionX = Random.Range(-3.7f, 3.7f);
         StartpositionY = Random.Range(-4f, 4f);
         RandomBonus = Random.Range(1, 5);
 
-        Destroy(gameObject, 8f);
+        Invoke("DeactivateAfterSeconds", 8f);
 
         transform.position = new Vector3(StartpositionX, StartpositionY, 0f);
     }
@@ -46,9 +46,14 @@ public class Bonus : MonoBehaviour
 
             if (RandomBonus >= 2)
             {
-                GameObject.Instantiate(Security, Vector3.zero, Quaternion.identity);
+                Security.SetActive(true);
             }
             gameObject.SetActive(false);
         }
     }
+    private void DeactivateAfterSeconds()
+    {
+        gameObject.SetActive(false);
+    }
+
 }
