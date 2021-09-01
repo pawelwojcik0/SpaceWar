@@ -12,11 +12,11 @@ public class Bonus : MonoBehaviour
     private float RandomBonus;
     private float StartpositionX;
     private float StartpositionY;
-    private Head m_Head;
+    private Head Head;
 
     private void Start()
     {
-        m_Head = FindObjectOfType<Head>();
+        Head = FindObjectOfType<Head>();
 
 
         StartpositionX = Random.Range(-3.7f, 3.7f);
@@ -32,7 +32,7 @@ public class Bonus : MonoBehaviour
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Head"))
         {
-            m_Head.HeadMovementSpeed = 4.0f;
+            Head.HeadMovementSpeed = 4.0f;
 
             GamePlayManager.Instance.Bullets += 10;
 

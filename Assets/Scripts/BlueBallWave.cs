@@ -10,9 +10,9 @@ public class BlueBallWave : MonoBehaviour
 
     private float StartPositionX;
     private float StartPositionY;
-    private AudioSource m_AudioSource;
-    private SpriteRenderer m_Sprite;
-    private CircleCollider2D m_Collider;
+    private AudioSource AudioSource;
+    private SpriteRenderer Sprite;
+    private CircleCollider2D Collider;
 
     private void Start()
     {
@@ -20,9 +20,9 @@ public class BlueBallWave : MonoBehaviour
         StartPositionY = Random.Range(6.0f, 8.0f);
         transform.position = new Vector3(StartPositionX, StartPositionY, 0f);
 
-        m_AudioSource = GetComponent<AudioSource>();
-        m_Collider = GetComponent<CircleCollider2D>();
-        m_Sprite = GetComponent<SpriteRenderer>();
+        AudioSource = GetComponent<AudioSource>();
+        Collider = GetComponent<CircleCollider2D>();
+        Sprite = GetComponent<SpriteRenderer>();
 
     }
     private void Update()
@@ -35,9 +35,9 @@ public class BlueBallWave : MonoBehaviour
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Head"))
         {
             GamePlayManager.Instance.Points += 1;
-            m_AudioSource.PlayOneShot(Good);
-            m_Sprite.enabled = false;
-            m_Collider.enabled = false;
+            AudioSource.PlayOneShot(Good);
+            Sprite.enabled = false;
+            Collider.enabled = false;
             Destroy(gameObject, 0.5f);
         }
 

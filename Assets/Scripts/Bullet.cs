@@ -6,10 +6,10 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private AudioClip Explosion; 
 
-    private AudioSource m_AudioSoruce;
-    private SpriteRenderer m_Sprite;
-    private BoxCollider2D m_Collider;
-    private Animator m_Animator;
+    private AudioSource AudioSoruce;
+    private SpriteRenderer Sprite;
+    private BoxCollider2D Collider;
+    private Animator Animator;
     private float speed;
     private Vector3 direction;
     private bool isSet;
@@ -24,10 +24,10 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        m_AudioSoruce = GetComponent<AudioSource>();
-        m_Sprite = GetComponent<SpriteRenderer>();
-        m_Collider = GetComponent<BoxCollider2D>();
-        m_Animator = GetComponentInChildren<Animator>();
+        AudioSoruce = GetComponent<AudioSource>();
+        Sprite = GetComponent<SpriteRenderer>();
+        Collider = GetComponent<BoxCollider2D>();
+        Animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -47,9 +47,9 @@ public class Bullet : MonoBehaviour
 
         if(collision.collider.gameObject.layer == LayerMask.NameToLayer("Killer"))
         {
-            m_Sprite.enabled = false;
-            m_Collider.enabled = false;
-            m_AudioSoruce.PlayOneShot(Explosion);
+            Sprite.enabled = false;
+            Collider.enabled = false;
+            AudioSoruce.PlayOneShot(Explosion);
 
 
             Destroy(gameObject, 0.13f);

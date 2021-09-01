@@ -15,15 +15,15 @@ public class Head : MonoBehaviour
     public Transform bulletOrigin;
     public float bulletSpeed = 5f;
 
-    private GamePlayManager m_Manager;
-    private AudioSource m_AudioSoruce;
+    private GamePlayManager Manager;
+    private AudioSource AudioSoruce;
     
 
     private void Start()
     {
-        m_Manager = FindObjectOfType<GamePlayManager>();
+        Manager = FindObjectOfType<GamePlayManager>();
 
-        m_AudioSoruce = GetComponent<AudioSource>();
+        AudioSoruce = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -66,7 +66,7 @@ public class Head : MonoBehaviour
 
     private void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && m_Manager.Bullets > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && Manager.Bullets > 0)
         {
             Bullet bullet = Instantiate(bulletfab);
             bullet.Setup(bulletOrigin.position, bulletSpeed, Vector3.up);
@@ -79,7 +79,7 @@ public class Head : MonoBehaviour
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Killer") && Security.activeInHierarchy == false)
         {
             Destroy(gameObject);
-            m_Manager.GameOver();
+            Manager.GameOver();
         }  
     }
 }

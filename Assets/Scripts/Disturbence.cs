@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Disturbence : MonoBehaviour
 {
-    private Head m_Head;
+    private Head Head;
     private float StartpositionX;
     private float StartpositionY;
     private float TimePassed;
 
     private void Start()
     {
-        m_Head = FindObjectOfType<Head>();
+        Head = FindObjectOfType<Head>();
 
         StartpositionX = Random.Range(-3.7f, 3.7f);
         StartpositionY = Random.Range(-4f, 4f);
@@ -23,7 +23,7 @@ public class Disturbence : MonoBehaviour
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Head"))
         {
-            m_Head.HeadMovementSpeed = Random.Range(1.8f, 3.5f);
+            Head.HeadMovementSpeed = Random.Range(1.8f, 3.5f);
             Destroy(gameObject);
         }
     }

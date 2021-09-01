@@ -10,8 +10,8 @@ public class BlackBallControler : MonoBehaviour, IHittable
 
     private float StartPositionX;
     private float StartPositionY;
-    private AudioSource m_AudioSource;
-    private GamePlayManager m_GamePlayManager;
+    private AudioSource AudioSource;
+    private GamePlayManager GamePlayManager;
     
 
     private void Start()
@@ -20,8 +20,8 @@ public class BlackBallControler : MonoBehaviour, IHittable
         StartPositionY = Random.Range(7.0f, 10.0f);
         transform.position = new Vector3(StartPositionX, StartPositionY, 0f);
 
-        m_AudioSource = GetComponent<AudioSource>();
-        m_GamePlayManager = FindObjectOfType<GamePlayManager>();
+        AudioSource = GetComponent<AudioSource>();
+        GamePlayManager = FindObjectOfType<GamePlayManager>();
     }
     void Update()
     {
@@ -32,9 +32,9 @@ public class BlackBallControler : MonoBehaviour, IHittable
     {
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Head"))
         {
-            m_AudioSource.PlayOneShot(Bad);
+            AudioSource.PlayOneShot(Bad);
             StartPosition();
-            m_GamePlayManager.lifes -= 1;
+            GamePlayManager.lifes -= 1;
         }
 
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Bottom Collider"))

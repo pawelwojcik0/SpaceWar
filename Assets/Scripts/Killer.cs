@@ -8,7 +8,7 @@ public class Killer : MonoBehaviour, IHittable
 
     private float StartPositionX;
     private float StartPositionY;
-    private AudioSource m_AudioSource;
+    private AudioSource AudioSource;
     
 
     private void Start()
@@ -17,7 +17,7 @@ public class Killer : MonoBehaviour, IHittable
         StartPositionY = Random.Range(11.0f, 13.0f);
         transform.position = new Vector3(StartPositionX, StartPositionY, 0f);
 
-        m_AudioSource = GetComponent<AudioSource>();
+        AudioSource = GetComponent<AudioSource>();
     }
     private void Update()
     {

@@ -7,20 +7,20 @@ public class SaveManager : Singleton<SaveManager>
 {
     public int MaxPoints;
     
-    private GamePlayManager m_Manager;
+    private GamePlayManager Manager;
 
 
     private void Start()
     {
-        m_Manager = FindObjectOfType<GamePlayManager>();
+        Manager = FindObjectOfType<GamePlayManager>();
         LoadSettings();
     }
 
     public void SaveSettings()
     {
-        if (m_Manager.Points > MaxPoints)
+        if (Manager.Points > MaxPoints)
         {
-            PlayerPrefs.SetInt("MaxPoints", m_Manager.Points);
+            PlayerPrefs.SetInt("MaxPoints", Manager.Points);
         }
     }
 
