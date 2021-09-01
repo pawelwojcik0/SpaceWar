@@ -35,6 +35,7 @@ public class BlueBallWave : MonoBehaviour
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Head"))
         {
             GamePlayManager.Instance.Points += 1;
+            GamePlayManager.Instance.Bullets += 1;
             AudioSource.PlayOneShot(Good);
             Sprite.enabled = false;
             Collider.enabled = false;

@@ -9,7 +9,6 @@ public class SaveManager : Singleton<SaveManager>
     
     private GamePlayManager Manager;
 
-
     private void Start()
     {
         Manager = FindObjectOfType<GamePlayManager>();

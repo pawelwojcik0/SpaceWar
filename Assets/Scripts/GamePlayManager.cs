@@ -21,7 +21,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     [SerializeField] private GameObject Disturbence;
     [SerializeField] private GameObject m_GameOver;
 
-    private HUDController m_HUD;
+    private HUDController HUD;
     private int RandomKiller;
 
     public int Bullets
@@ -30,7 +30,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
         set
         {
             m_bullets = value;
-            m_HUD.UpdateBullet(m_bullets);
+            HUD.UpdateBullet(m_bullets);
         }
     }
 
@@ -40,13 +40,13 @@ public class GamePlayManager : Singleton<GamePlayManager>
         set
         {
             m_points = value;
-            m_HUD.UpdatePoints(m_points);
+            HUD.UpdatePoints(m_points);
         }
     }
   
     private void Start()
     {
-        m_HUD = FindObjectOfType<HUDController>();
+        HUD = FindObjectOfType<HUDController>();
 
         Bullets = 15;
         Points = 0;

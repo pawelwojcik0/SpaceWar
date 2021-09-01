@@ -14,11 +14,13 @@ public class Security : MonoBehaviour
 
         transform.position = Transform.position;
         transform.localScale = new Vector3(0.21f, 0.21f, 1f);
+        
+        Invoke("DeactivateAfterSeconds", 8f);
     }
 
     private void OnEnable()
     {
-        Invoke("DeactivateAfterSeconds", 8f);
+        
     }
 
     private void Update()
@@ -33,12 +35,12 @@ public class Security : MonoBehaviour
         if (hittable != null)
         {
             hittable.OnHit();
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
     private void DeactivateAfterSeconds()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

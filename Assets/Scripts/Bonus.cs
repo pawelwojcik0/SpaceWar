@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Bonus : MonoBehaviour
 {
-
     public GameObject BlueBallWave;
     public GameObject Security;
 
@@ -17,7 +16,6 @@ public class Bonus : MonoBehaviour
     private void Start()
     {
         Head = FindObjectOfType<Head>();
-
 
         StartpositionX = Random.Range(-3.7f, 3.7f);
         StartpositionY = Random.Range(-4f, 4f);
@@ -46,7 +44,7 @@ public class Bonus : MonoBehaviour
 
             if (RandomBonus >= 2)
             {
-                Security.SetActive(true);
+                GameObject.Instantiate(Security, Vector3.zero, Quaternion.identity);
             }
             gameObject.SetActive(false);
         }

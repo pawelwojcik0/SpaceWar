@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class WhiteBallControler : MonoBehaviour
 {
-
     [SerializeField] AudioClip Good;
     [SerializeField] private float MovementSpeed;
 
     private float StartPositionX;
     private float StartPositionY;
     private AudioSource m_AudioSource;
-     
-
-
+    
     private void Start()
     {
         StartPositionX = Random.Range(-3.2f, 3.2f);
@@ -32,6 +29,7 @@ public class WhiteBallControler : MonoBehaviour
         if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Head"))
         {
             GamePlayManager.Instance.Points += 1;
+            GamePlayManager.Instance.Bullets += 1;
             m_AudioSource.PlayOneShot(Good);
             StartPosition();
         }

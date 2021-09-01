@@ -7,7 +7,6 @@ public class Disturbence : MonoBehaviour
     private Head Head;
     private float StartpositionX;
     private float StartpositionY;
-    private float TimePassed;
 
     private void Start()
     {

@@ -76,7 +76,7 @@ public class Head : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Killer") && Security.activeInHierarchy == false)
+        if (collision.collider.gameObject.layer == LayerMask.NameToLayer("Killer") )
         {
             Destroy(gameObject);
             Manager.GameOver();
