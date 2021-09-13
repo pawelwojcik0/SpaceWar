@@ -32,7 +32,7 @@ public class Bonus : MonoBehaviour
         {
             Head.HeadMovementSpeed = 4.0f;
 
-            GamePlayManager.Instance.Bullets += 10;
+            GamePlayManager.Instance.Bullets += 7;
 
             if (RandomBonus <= 1)
             {

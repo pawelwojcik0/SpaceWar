@@ -48,7 +48,7 @@ public class GamePlayManager : Singleton<GamePlayManager>
     {
         HUD = FindObjectOfType<HUDController>();
 
-        Bullets = 15;
+        Bullets = 10;
         Points = 0;
         lifes = 3;
 
@@ -64,6 +64,11 @@ public class GamePlayManager : Singleton<GamePlayManager>
     {
         Life();
         Restart();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     private void Life()
